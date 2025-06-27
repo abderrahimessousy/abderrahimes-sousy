@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Abderrahim - Développeur Web</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --red-primary: #C2002E; /* A slightly muted, deep berry-red */
+            --red-secondary: #A00025; /* Darker tone for accents */
+            --white-text: #F8F8F8; /* Clean, soft white */
+            --black-bg: #0F0F0F; /* Rich, dark background */
+            --dark-gray: #252525; /* Slightly lighter dark gray for elements */
+            --shadow-glow: 0 0 25px rgba(194, 0, 46, 0.6); /* Adjusted glow for the new red */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            
+            /* Variables dyalek l-jdad li sta3malti f CSS dyal projects */
+            --accent-red: #E10600; /* Red fort dyal projects */
+            --primary-black: #0F0F0F; /* Background li sta3malti f projects */
+            --light-grey: #F0F0F0; /* Overlay text color */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--black-bg);
+            color: var(--white-text);
+            margin: 0;
+            padding-top: 70px; /* Adjust based on navbar height */
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--dark-gray) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            min-height: 70px;
+        }
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--red-primary) !important;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(194, 0, 46, 0.4);
+        }
+        .navbar-nav .nav-link {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--white-text);
+            padding: 10px 18px;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--red-primary) !important;
+            transform: translateY(-2px);
+        }
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--red-primary);
+            transition: width 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 80%;
+        }
+        .navbar-toggler {
+            border-color: rgba(194, 0, 46, 0.5) !important;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28194, 0, 46, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        /* Hero section */
+        #accueil {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            color: var(--white-text);
+        }
+        #particles-js {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+        }
+        #accueil .content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 20px;
+            animation: fadeInScale 1.5s ease forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        @keyframes fadeInScale {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #accueil img.rounded-circle {
+            width: 180px;
+            height: 180px;
+            border: 5px solid var(--red-primary);
+            margin-bottom: 25px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 0 25px rgba(194, 0, 46, 0.3);
+        }
+        #accueil img.rounded-circle:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        #accueil h1 {
+            font-family: var(--font-heading);
+            font-size: 4.8rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: var(--red-primary);
+            text-shadow: 0 0 15px var(--red-primary);
+        }
+
+        .typed-text {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white-text);
+            text-shadow: 0 0 10px rgba(248, 248, 248, 0.5);
+            min-height: 55px;
+            margin-bottom: 40px;
+        }
+
+        #accueil a.btn-primary {
+            background: linear-gradient(45deg, var(--red-primary), var(--red-secondary));
+            color: var(--white-text);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-size: 1.35rem;
+            box-shadow: 0 10px 30px rgba(194, 0, 46, 0.6);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        #accueil a.btn-primary:hover {
+            background: linear-gradient(45deg, var(--red-secondary), var(--red-primary));
+            box-shadow: 0 15px 45px rgba(194, 0, 46, 0.8);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Sections styling */
+        section {
+            max-width: 1200px;
+            margin: 0 auto 90px;
+            padding: 100px 30px 50px;
+        }
+        section h2 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--red-primary);
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            text-transform: uppercase;
+        }
+        section h2::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--red-primary), var(--red-secondary));
+            margin: 15px auto 0;
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--red-primary);
+        }
+
+        /* Profil section */
+        #profil p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+            color: var(--white-text);
+            line-height: 1.8;
+        }
+
+        /* Competences */
+        #competences .progress {
+            height: 30px;
+            border-radius: 20px;
+            background-color: #2a2a2a;
+            margin-bottom: 35px;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+        }
+        #competences .progress-bar {
+            background: linear-gradient(90deg, var(--red-primary), var(--red-secondary));
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--white-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+        #competences .mb-2 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--white-text);
+        }
+        #competences .col-md-5.text-center.cv-container {
+            background: var(--dark-gray);
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(194, 0, 46, 0.2);
+        }
+        #competences .col-md-5.text-center.cv-container:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 50px var(--shadow-glow);
+        }
+        #competences img.cv-image {
+            max-width: 100%;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+        #competences img.cv-image:hover {
+            transform: scale(1.03) rotate(-1deg);
+            box-shadow: var(--shadow-glow);
+        }
+        #competences .cv-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--red-primary);
+            text-shadow: 0 0 10px rgba(194, 0, 46, 0.6);
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        #competences .cv-btn {
+            background: none;
+            border: 2px solid var(--red-primary) !important;
+            color: var(--red-primary) !important;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            padding: 14px 45px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 0 25px rgba(194, 0, 46, 0.5);
+            display: inline-block;
+            text-decoration: none;
+        }
+        #competences .cv-btn:hover {
+            background-color: var(--red-primary);
+            color: var(--white-text) !important;
+            box-shadow: var(--shadow-glow);
+            transform: scale(1.08);
+        }
+
+        /* --- MODIFIED PROJECTS SECTION CSS (FOR COVERFLOW EFFECT) --- */
+        #projects {
+            padding: 0;
+            max-width: 100vw;
+            margin: 80px auto;
+            background-color: var(--primary-black);
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            overflow: hidden;
+        }
+        #projects h2 {
+            padding: 0px 20px 60px;
+            color: var(--accent-red);
+            text-shadow: 0 0 10px rgba(225,6,0,0.7);
+        }
+        .swiper {
+            width: 100vw;
+            height: 85vh;
+            user-select: none;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .swiper-wrapper {
+            align-items: center;
+        }
+
+        /* --- Specific CSS for Coverflow Effect --- */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            transition: transform 0.5s ease;
+            border-radius: 15px; /* Ghadi nrdou l-radius باش تبan b7al carte */
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5); /* Shadow zayd */
+            width: 80vw !important; /* Hadchi bach slides ybanou sghar chwiya */
+            height: 70vh !important; /* W l-height dyalhom */
+            margin: auto; /* Centre les slides */
+            background-color: var(--dark-gray); /* Background bash yban l-border mzn */
+            border: 2px solid var(--accent-red); /* Border li tayban f-active slide */
+        }
+
+        /* L'active slide f-coverflow makat7tajch chi CSS 5ass, kayqadha Swiper */
+        .swiper-slide-active {
+            box-shadow: 0 0 35px var(--accent-red); /* Lueur zayda 3la l-active */
+            border: 2px solid var(--red-primary); /* Border plus prononcé */
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            transition: transform 0.4s ease;
+            border-radius: 12px; /* Radius sghar men dyal slide bash yban l-border */
+        }
+        .swiper-slide img:hover {
+            transform: scale(1.01);
+        }
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3));
+            color: var(--light-grey);
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            user-select: none;
+            text-align: center;
+            border-bottom-left-radius: 15px; /* Raoudha m3a l-slide */
+            border-bottom-right-radius: 15px; /* Raoudha m3a l-slide */
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .swiper-slide:hover .project-overlay {
+            opacity: 1;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--accent-red);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            box-shadow: 0 0 20px var(--accent-red);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: var(--accent-red);
+            color: var(--primary-black);
+            box-shadow: 0 0 40px var(--accent-red);
+            transform: translateY(-50%) scale(1.15);
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 2rem !important;
+        }
+        .swiper-pagination-bullet {
+            background: var(--light-grey);
+            opacity: 0.6;
+            width: 12px;
+            height: 12px;
+        }
+        .swiper-pagination-bullet-active {
+            background: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red);
+            opacity: 1;
+            width: 15px;
+            height: 15px;
+        }
+        /* Contact Section */
+        #contact {
+            padding: 80px 30px; /* Padding for the section */
+            text-align: center;
+            background-color: var(--dark-gray); /* Darker background for contrast */
+            border-radius: 15px; /* Slightly rounded corners */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); /* Soft shadow */
+            margin-bottom: 90px; /* Space before footer */
+            border: 1px solid rgba(194, 0, 46, 0.2); /* Subtle border */
+        }
+
+        #contact h2 {
+            color: var(--red-primary);
+            text-shadow: 0 0 10px rgba(194, 0, 46, 0.6);
+            margin-bottom: 40px;
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--white-text);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #contact a {
+            color: var(--red-primary); /* Link color */
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: var(--white-text); /* Hover color */
+            text-shadow: 0 0 10px var(--red-primary); /* Glow on hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray); /* Same as navbar */
+            color: var(--white-text);
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(194, 0, 46, 0.2); /* Subtle top border */
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5); /* Shadow for distinction */
+            margin-top: 50px; /* Space after contact section */
+        }
+
+        /* --- Adaptations Responsives (for Coverflow) --- */
+        @media (max-width: 1199px) {
+            .swiper { height: 75vh; }
+            .swiper-slide { width: 85vw !important; height: 65vh !important; }
+            .project-overlay { font-size: 1.6rem; padding: 18px 25px; }
+        }
+
+        @media (max-width: 991px) {
+            .swiper { height: 65vh; }
+            .swiper-slide { width: 90vw !important; height: 55vh !important; }
+            .project-overlay { font-size: 1.4rem; padding: 15px 20px; }
+            .swiper-button-next, .swiper-button-prev {
+                width: 50px; height: 50px;
+            }
+            .swiper-button-next::after, .swiper-button-prev::after {
+                font-size: 1.6rem !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .swiper { height: 55vh; }
+            .swiper-slide { width: 95vw !important; height: 45vh !important; }
+            .project-overlay { font-size: 1.2rem; padding: 10px 15px; }
+            .swiper-button-next, .swiper-button-prev {
+                display: none; /* Cache les boutons de navigation sur petits écrans */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .swiper { height: 45vh; }
+            .swiper-slide { width: 98vw !important; height: 40vh !important; border-radius: 10px; }
+            .project-overlay { font-size: 1rem; padding: 8px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">ABDERRAHIM</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#accueil">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header id="accueil">
+    <div id="particles-js"></div>
+    <div class="content">
+        <img src="img/abderrahim.jpg" alt="Photo Abderrahim" class="rounded-circle" />
+        <h1>ABDERRAHIM</h1>
+        <div class="typed-text"></div>
+        <a href="#projects" class="btn btn-primary mt-4">Découvrez mes Projets</a>
+    </div>
+</header>
+
+<section id="profil">
+    <h2>Mon Profil</h2>
+    <p>
+        Jeune diplômé motivé, titulaire d’un Bac+3 en Systèmes Informatiques Embarqués, avec une solide formation en développement web, programmation embarquée, réseaux et bases de données. Passionné par les nouvelles technologies et l’intelligence artificielle, je suis capable de concevoir et développer des solutions efficaces, innovantes et adaptées aux besoins.
+
+
+    </p>
+</section>
+
+<section id="competences">
+    <h2>Mes Compétences</h2>
+    <div class="row justify-content-center align-items-center gx-5">
+        <div class="col-md-7">
+            <div class="skill-item mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>HTML & CSS</span>
+                    <i class="fab fa-html5 text-white me-2"></i>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 95%;">95%</div>
+                </div>
+            </div>
+            <div class="skill-item mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>JavaScript</span>
+                    <i class="fab fa-js text-white me-2"></i>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 90%;">90%</div>
+                </div>
+            </div>
+            <div class="skill-item mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>PHP & MySQL</span>
+                    <i class="fas fa-database text-white me-2"></i>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 85%;">85%</div>
+                </div>
+            </div>
+            <div class="skill-item mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>C & C++</span>
+                    <i class="fab fa-react text-white me-2"></i>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 80%;">80%</div>
+                </div>
+            </div>
+            <div class="skill-item mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>Vb.net</span>
+                    <i class="fab fa-node-js text-white me-2"></i>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 75%;">75%</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 text-center cv-container mt-md-0 mt-5">
+            <img src="img/cv.png" alt="CV Abderrahim" class="cv-image" />
+            <div class="cv-title"> mon CV Détaillé</div>
+        </div>
+    </div>
+</section>
+
+
+<section id="projects" data-aos="fade-up">
+    <h2>Mes Projets</h2>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="img/stage.png" alt="Projet 1: Site E-commerce" />
+                <div class="project-overlay">Projet de stage</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="img/direction.png" alt="Projet 2: Application Mobile" />
+                <div class="project-overlay">Projet de stage</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="img/login.png" alt="Projet 3: Dashboard Admin" />
+                <div class="project-overlay">Site E-commerce</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="img/dirh.png" alt="Projet 4: Portfolio Web" />
+                <div class="project-overlay">Site E-commerce</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="img/dh.png" alt="Projet 5: ERP Solution" />
+                <div class="project-overlay">Site E-commerce</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="img/phone.png" alt="Projet 6: CRM Platform" />
+                <div class="project-overlay">Site E-commerce</div>
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+
+
+<section id="contact">
+    <h2>Me Contacter</h2>
+    <p>Je suis toujours ouvert aux nouvelles opportunités et collaborations. N'hésitez pas à me contacter si vous avez un projet en tête ou si vous souhaitez en savoir plus sur mon travail.</p>
+    <p>Vous pouvez me joindre directement par email à : <a href="mailto:abderrahim@example.com">abderahim8h@gmail.com</a></p>
+    <p>Retrouvez-me également sur Instagram : <a href="https://www.linkedin.com/in/abderrahim" target="_blank">https://www.instagram.com/abdowny/</a></p>
+</section>
+
+<footer>
+    &copy; 2025 Abderrahim Es-Sousy — Tous droits réservés.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+    // Typed.js Initialization
+    new Typed('.typed-text', {
+        strings: ["Développeur Web", "Concepteur UI/UX", "Expert Full Stack", "Innovateur"],
+        typeSpeed: 60,
+        backSpeed: 30,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+        smartBackspace: true,
+    });
+
+    // Particles.js Configuration
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "#C2002E" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5, random: false },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: "#C2002E", opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 4, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+            modes: { grab: { distance: 180, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+    });
+
+    // Swiper.js Initialization for full-width projects
+    const swiper = new Swiper(".mySwiper", {
+        // *** TABDILAT JDDAD HNA: NSTAKHDMOU 'COVERFLOW' EFFECT ***
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true, // Slides centrees
+        slidesPerView: "auto", // Swiper kayqad l-3adad dyal slides li kaybanou
+        loop: true, // Makes the carousel loop continuously
+        coverflowEffect: {
+            rotate: 40, // Degree dyal tlawiyan slides
+            stretch: 0, // Stretch dyal slides
+            depth: 100, // 3omq dyal l-effect
+            modifier: 1, // Modifier dyal effect
+            slideShadows: false, // Bla shadows (ila bghiti tzidha, dir true)
+        },
+        autoplay: {
+            delay: 4500, // Slides change every 4.5 seconds
+            disableOnInteraction: false, // Autoplay continues even if user interacts
+        },
+        pagination: {
+            el: ".swiper-pagination", // Element for pagination dots
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next", // Element for 'next' arrow
+            prevEl: ".swiper-button-prev", // Element for 'previous' arrow
+        },
+        keyboard: {
+            enabled: true,
+            onlyInViewport: true,
+        },
+        // Observers baqin mzyanin bach Swiper yqad ychuf les changements
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        
+        // Responsive settings for different screen sizes - Adjust slide width
+        breakpoints: { 
+            0: { 
+                slidesPerView: 1.2, /* 1.2 slide pour mobile */
+                spaceBetween: 10,
+                coverflowEffect: { rotate: 50, stretch: 0, depth: 80, modifier: 1, slideShadows: false },
+            },
+            768: { 
+                slidesPerView: 1.5, /* 1.5 slide pour tablette */
+                spaceBetween: 20,
+                coverflowEffect: { rotate: 40, stretch: 0, depth: 100, modifier: 1, slideShadows: false },
+            },
+            1024: { 
+                slidesPerView: 1.8, /* 1.8 slide pour grand écran */
+                spaceBetween: 30,
+                coverflowEffect: { rotate: 40, stretch: 0, depth: 100, modifier: 1, slideShadows: false },
+            },
+        },
+    });
+
+    // Initialize AOS
+    AOS.init({
+        duration: 1000, // Duration of the animation (in ms)
+        once: true,     // Whether animation should happen only once - while scrolling down
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Remove active class from all links
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            // Add active class to the clicked link
+            this.classList.add('active');
+
+            // Collapse navbar on mobile after click
+            if (window.innerWidth < 992) {
+                document.getElementById('navbarNav').classList.remove('show');
+            }
+        });
+    });
+
+    // Set active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollThreshold = window.scrollY + 150; // Adjust offset as needed
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollThreshold >= sectionTop && scrollThreshold < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
